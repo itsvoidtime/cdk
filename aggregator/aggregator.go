@@ -386,7 +386,8 @@ func (a *Aggregator) logLastVerifiedBatchNumber() {
 			if err != nil {
 				a.logger.Errorf("Error getting last verified batch number: %v", err)
 			} else {
-				a.logger.Infof("Last Verified Batch Number:%v", lastVerifiedBatchNumber)
+				tmpLogger := a.logger.WithFields("batch", lastVerifiedBatchNumber)
+				tmpLogger.Infof("Last Verified Batch Number:%v", lastVerifiedBatchNumber)
 			}
 		}
 	}
