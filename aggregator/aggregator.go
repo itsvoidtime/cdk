@@ -381,7 +381,7 @@ func (a *Aggregator) logLastVerifiedBatchNumber() {
 		case <-a.ctx.Done():
 			return
 		default:
-			time.Sleep(a.cfg.RetryTime.Duration * 2)
+			time.Sleep(a.cfg.RetryTime.Duration * 2) // nolint:mnd
 			lastVerifiedBatchNumber, err := a.etherman.GetLatestVerifiedBatchNum()
 			if err != nil {
 				a.logger.Errorf("Error getting last verified batch number: %v", err)
