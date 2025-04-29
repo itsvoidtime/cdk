@@ -110,6 +110,7 @@ func Test_Start(t *testing.T) {
 		err := a.Start()
 		require.NoError(t, err)
 	}()
+	go a.logLastVerifiedBatchNumber()
 	time.Sleep(time.Second)
 	a.ctx.Done()
 	time.Sleep(time.Second)
