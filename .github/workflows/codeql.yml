@@ -59,3 +59,5 @@ jobs:
         uses: github/codeql-action/analyze@v3
         with:
           category: "/codeql/${{ matrix.language }}-analysis"
+        env:
+          CODEQL_ACTION_FEATURE_SARIF_COMBINE: false
