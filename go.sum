@@ -27,6 +27,8 @@ github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8-0.20250507054844-a9e4511
 github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8-0.20250507054844-a9e451133481/go.mod h1:IYqOmGBjvpJKRjVVqH3pGQysHU8W8YSctbl4TQDjNMg=
 github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8-0.20250507055106-0321b43a1ee2 h1:2nufAuWYDzNcNK/tIVkWF47hStm/xITpq+SYRTFGvhQ=
 github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8-0.20250507055106-0321b43a1ee2/go.mod h1:IYqOmGBjvpJKRjVVqH3pGQysHU8W8YSctbl4TQDjNMg=
+github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8-0.20250507070913-a33005d489e6 h1:+aOEdUWf9pxk3dZWJ/DfKMpAXNWCF9+abA5DBngOobw=
+github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8-0.20250507070913-a33005d489e6/go.mod h1:IYqOmGBjvpJKRjVVqH3pGQysHU8W8YSctbl4TQDjNMg=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/toml v1.4.0 h1:kuoIxZQy2WRRk1pttg9asf+WVv6tWQuBNVmK8+nqPr0=
 github.com/BurntSushi/toml v1.4.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=

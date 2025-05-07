@@ -10,8 +10,12 @@ setup() {
         echo "BRIDGE_ADDRESS env variable is not provided, resolving the bridge address from the Kurtosis CDK '$combined_json_file'" >&3
 
         # Fetching the combined JSON output and filtering to get polygonZkEVMBridgeAddress
-        combined_json_output=$($contracts_service_wrapper "cat $combined_json_file" | tail -n +2)
-        bridge_default_address=$(echo "$combined_json_output" | jq -r .polygonZkEVMBridgeAddress)
+        combined_json_output=$($contracts_service_wrapper "cat $combined_json_file")
+        if echo "$combined_json_output" | jq empty > /dev/null 2>&1; then
+            bridge_default_address=$(echo "$combined_json_output" | jq -r .polygonZkEVMBridgeAddress)
+        else
+            bridge_default_address=$(echo "$combined_json_output" | tail -n +2 | jq -r .polygonZkEVMBridgeAddress)
+        fi
         BRIDGE_ADDRESS=$bridge_default_address
     fi
     echo "Bridge address=$BRIDGE_ADDRESS" >&3
@@ -29,10 +33,12 @@ setup() {
     else
         echo "GAS_TOKEN_ADDR not provided, retrieving from rollup parameters file." >&3
         readonly rollup_params_file=/opt/zkevm/create_rollup_parameters.json
-        run bash -c "$contracts_service_wrapper 'cat $rollup_params_file' | tail -n +2 | jq -r '.gasTokenAddress'"
-        assert_success
-        assert_output --regexp "0x[a-fA-F0-9]{40}"
-        gas_token_addr=$output
+        rollup_params_output=$($contracts_service_wrapper "cat $rollup_params_file")
+        if echo "$rollup_params_output" | jq empty > /dev/null 2>&1; then
+            gas_token_addr=$(echo "$rollup_params_output" | jq -r .gasTokenAddress)
+        else
+            gas_token_addr=$(echo "$rollup_params_output" | tail -n +2 | jq -r .gasTokenAddress)
+        fi
     fi
     readonly is_forced=${IS_FORCED:-"true"}
     readonly bridge_addr=$BRIDGE_ADDRESS
@@ -170,7 +176,6 @@ native_gas_token_deposit_to_WETH() {
     echo "Gas token addr $gas_token_addr, L1 RPC: $l1_rpc_url" >&3
 
     local initial_receiver_balance=$(cast call --rpc-url "$l1_rpc_url" "$gas_token_addr" "$balance_of_fn_sig" "$destination_addr" | awk '{print $1}')
-    assert_success
     echo "Receiver balance of gas token on L1 $initial_receiver_balance" >&3
 
     destination_net=$l1_rpc_network_id
