@@ -3,6 +3,7 @@
 function bridge_message() {
     local token_addr="$1"
     local rpc_url="$2"
+    local bridge_addr="$3"
     local bridge_sig='bridgeMessage(uint32,address,bool,bytes)'
 
     if [[ $token_addr == "0x0000000000000000000000000000000000000000" ]]; then
@@ -35,6 +36,7 @@ function bridge_message() {
 function bridge_asset() {
     local token_addr="$1"
     local rpc_url="$2"
+    local bridge_addr="$3"
     local bridge_sig='bridgeAsset(uint32,address,uint256,address,bool,bytes)'
 
     if [[ $token_addr == "0x0000000000000000000000000000000000000000" ]]; then
@@ -68,6 +70,7 @@ function bridge_asset() {
 function claim() {
     local destination_rpc_url="$1"
     local bridge_type="$2"
+    local bridge_addr="$3"
     local claim_sig="claimAsset(bytes32[32],bytes32[32],uint256,bytes32,bytes32,uint32,address,uint32,address,uint256,bytes)"
     if [[ $bridge_type == "bridgeMessage" ]]; then
         claim_sig="claimMessage(bytes32[32],bytes32[32],uint256,bytes32,bytes32,uint32,address,uint32,address,uint256,bytes)"
@@ -142,7 +145,7 @@ function claim_tx_hash() {
     local destination_addr="$3"
     local destination_rpc_url="$4"
     local bridge_merkle_proof_url="$5"
-    
+
     readonly bridge_deposit_file=$(mktemp)
     local ready_for_claim="false"
     local start_time=$(date +%s)
@@ -223,7 +226,7 @@ function claim_tx_hash() {
     rm $current_deposit
     rm $current_proof
     rm $bridge_deposit_file
-    
+
 }
 function request_merkle_proof(){
     local curr_deposit_cnt="$1"
@@ -244,10 +247,10 @@ function request_claim(){
     local deposit_file="$1"
     local proof_file="$2"
     local destination_rpc_url="$3"
-    
+
     local leaf_type=$(jq -r '.leaf_type' $deposit_file)
     local claim_sig="claimAsset(bytes32[32],bytes32[32],uint256,bytes32,bytes32,uint32,address,uint32,address,uint256,bytes)"
-    
+
     if [[ $leaf_type != "0" ]]; then
        claim_sig="claimMessage(bytes32[32],bytes32[32],uint256,bytes32,bytes32,uint32,address,uint32,address,uint256,bytes)"
     fi
@@ -308,6 +311,7 @@ function wait_for_claim() {
     local claim_frequency="$2" # claim frequency (in seconds)
     local destination_rpc_url="$3" # destination rpc url
     local bridge_type="$4"        # bridgeAsset or bridgeMessage
+    local bridge_addr="$5"
     local start_time=$(date +%s)
     local end_time=$((start_time + timeout))
 
@@ -318,7 +322,7 @@ function wait_for_claim() {
             exit 1
         fi
 
-        run claim $destination_rpc_url $bridge_type
+        run claim $destination_rpc_url $bridge_type $bridge_addr
         if [ $status -eq 0 ]; then
             break
         fi
