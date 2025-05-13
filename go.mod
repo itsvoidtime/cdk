@@ -8,7 +8,7 @@ require (
 	github.com/0xPolygon/cdk-rpc v0.0.0-20241004114257-6c3cb6eebfb6
 	github.com/0xPolygon/zkevm-ethtx-manager v0.2.11
 	github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8
-	github.com/agglayer/aggkit v0.3.0-beta2.0.20250512225948-8bd2cc9217a5
+	github.com/agglayer/aggkit v0.3.0-beta2
 	github.com/ethereum/go-ethereum v1.15.5
 	github.com/iden3/go-iden3-crypto v0.0.17
 	github.com/invopop/jsonschema v0.13.0

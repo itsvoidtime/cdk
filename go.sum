@@ -37,8 +37,6 @@ github.com/VictoriaMetrics/fastcache v1.12.2 h1:N0y9ASrJ0F6h0QaC3o6uJb3NIZ9VKLjC
 github.com/VictoriaMetrics/fastcache v1.12.2/go.mod h1:AmC+Nzz1+3G2eCPapF6UcsnkThDcMsQicp4xDukwJYI=
 github.com/agglayer/aggkit v0.3.0-beta2 h1:F3oA6dsdulCWIMm7S8MB87DR+6evPM5dQXaK9zySOv8=
 github.com/agglayer/aggkit v0.3.0-beta2/go.mod h1:2vzMZXYwOOoJ9GWBrUT59zLrIR3+rFPvGypQBVpxxL8=
-github.com/agglayer/aggkit v0.3.0-beta2.0.20250512225948-8bd2cc9217a5 h1:5ML+yJm79aIP3VWRX2NZXGJaihFhDuF1zp/XjLSkWDM=
-github.com/agglayer/aggkit v0.3.0-beta2.0.20250512225948-8bd2cc9217a5/go.mod h1:2vzMZXYwOOoJ9GWBrUT59zLrIR3+rFPvGypQBVpxxL8=
 github.com/agglayer/go_signer v0.0.6 h1:IKeh4JMvWAXZX/0lGEF0W/UatmUc7LEo5Nm0L+yCcqc=
 github.com/agglayer/go_signer v0.0.6/go.mod h1:YIoQNqvA10L/qV9vlAV8rXjejnyPpnYA0A/zU1uxXeY=
 github.com/allegro/bigcache v1.2.1-0.20190218064605-e24eb225f156/go.mod h1:Cb/ax3seSYIx7SuZdm2G2xzfwmv3TPSk2ucNfQESPXM=
