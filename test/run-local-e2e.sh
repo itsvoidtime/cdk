@@ -16,14 +16,15 @@ log_error() {
 
 trap 'log_error "Script failed at line $LINENO"' ERR
 
-if [ "$#" -ne 3 ]; then
-    echo "Usage: $0 <test_type: fork9-cdk-validium | fork11-rollup | fork12-cdk-validium | fork12-rollup> <path/to/kurtosis/cdk/repo> <path/to/e2e/repo>"
+if [ "$#" -ne 4 ]; then
+    echo "Usage: $0 <test_type: fork9-cdk-validium | fork11-rollup | fork12-cdk-validium | fork12-rollup> <path/to/kurtosis-cdk/repo> <path/to/e2e/repo> <run_tests: true | false>"
     exit 1
 fi
 
 TEST_TYPE=$1
 KURTOSIS_FOLDER=$2
 E2E_FOLDER=$3
+RUN_TESTS=$4
 
 PROJECT_ROOT="$PWD"
 ROOT_FOLDER="/tmp/cdk-e2e-run"
@@ -74,23 +75,33 @@ fi
 log_info "$ENCLAVE enclave started successfully."
 popd > /dev/null
 
-log_info "Using provided Agglayer E2E repo at: $E2E_FOLDER"
+if [ "$RUN_TESTS" == "true" ]; then
+    log_info "Using provided Agglayer E2E repo at: $E2E_FOLDER"
 
-pushd "$E2E_FOLDER" > /dev/null
+    pushd "$E2E_FOLDER" > /dev/null
 
-# Setup environment
-log_info "Setting up e2e environment..."
-set -a
-source ./tests/.env
-set +a
+    # Setup environment
+    log_info "Setting up e2e environment..."
+    set -a
+    source ./tests/.env
+    set +a
 
-export BATS_LIB_PATH="$PWD/core/helpers/lib"
-export PROJECT_ROOT="$PWD"
-export ENCLAVE="$ENCLAVE"
-export DISABLE_L2_FUND="true"
+    export BATS_LIB_PATH="$PWD/core/helpers/lib"
+    export PROJECT_ROOT="$PWD"
+    export ENCLAVE="$ENCLAVE"
+    export DISABLE_L2_FUND="true"
 
-log_info "Running BATS E2E tests..."
-bats ./tests/cdk
+    log_info "Running BATS E2E tests..."
+    bats tests/cdk/access-list-e2e.bats tests/cdk/basic-e2e.bats tests/cdk/e2e.bats
+    if [[ "$TEST_TYPE" == "fork9-cdk-validium" || "$TEST_TYPE" == "fork11-rollup" ]]; then
+        bats tests/cdk/bridge-e2e.bats
+    elif [[ "$TEST_TYPE" == "fork12-cdk-validium" || "$TEST_TYPE" == "fork12-rollup" ]]; then
+        bats tests/aggkit/bridge-e2e.bats tests/aggkit/bridge-e2e-custom-gas.bats
+    fi
 
-popd > /dev/null
-log_info "E2E tests executed. Logs saved to $LOG_FILE"
+    popd > /dev/null
+    log_info "E2E tests executed. Logs saved to $LOG_FILE"
+else
+    log_info "Skipping tests as per user request."
+    exit 0
+fi
