@@ -1,7 +1,6 @@
 {
   "deployment_stages": {
-    "deploy_aggkit_node": true,
-    "deploy_cdk_bridge_infra": false
+    "deploy_cdk_bridge_infra": true
   },
   "args": {
     "zkevm_contracts_image": "jhkimqd/zkevm-contracts:v10.1.0-rc.5-fork.12",
@@ -10,9 +9,6 @@
     "gas_token_enabled": true,
     "gas_token_address": "",
     "consensus_contract_type": "rollup",
-    "sequencer_type": "erigon",
-    "aggkit_image": "ghcr.io/agglayer/aggkit:0.3.0-beta8-tmp-bridge",
-    "aggkit_components": "bridge",
-    "enable_aggkit_claim_sponsor": true
+    "sequencer_type": "erigon"
   }
 }

@@ -17,7 +17,7 @@ log_error() {
 trap 'log_error "Script failed at line $LINENO"' ERR
 
 if [ "$#" -lt 2 ]; then
-    echo "Usage: $0 <test_type: fork9-cdk-validium | fork11-rollup | fork12-cdk-validium | fork12-rollup> <path/to/kurtosis-cdk/repo> [<path/to/e2e/repo>]"
+    echo "Usage: $0 <test_type: fork9-cdk-validium | fork11-rollup | fork12-cdk-validium | fork12-rollup | fork-12-pessimistic | fork12-rollup-zkevm-bridge | fork12-multi-l2-networks> <path/to/kurtosis-cdk/repo> [<path/to/e2e/repo>]"
     exit 1
 fi
 
@@ -66,6 +66,16 @@ fork11-rollup)
 fork12-cdk-validium)
     kurtosis run --enclave "$ENCLAVE" --args-file "$PROJECT_ROOT/.github/test_fork12_cdk_validium_e2e_args.json" .
     ;;
+fork12-pessimistic)
+    kurtosis run --enclave "$ENCLAVE" --args-file "$PROJECT_ROOT/.github/test_fork12_pessimistic_e2e_args.json" .
+    ;;
+fork12-rollup-zkevm-bridge)
+    kurtosis run --enclave "$ENCLAVE" --args-file "$PROJECT_ROOT/.github/test_fork12_rollup_e2e_args_zkevm_bridge.json" .
+    ;;
+fork12-multi-l2-networks)
+    kurtosis run --enclave "$ENCLAVE" --args-file "$PROJECT_ROOT/.github/test_fork12_rollup_multi_e2e_args_1.json" .
+    kurtosis run --enclave "$ENCLAVE" --args-file "$PROJECT_ROOT/.github/test_fork12_rollup_multi_e2e_args_2.json" .
+    ;;
 fork12-rollup)
     kurtosis run --enclave "$ENCLAVE" --args-file "$PROJECT_ROOT/.github/test_fork12_rollup_e2e_args.json" .
     ;;
@@ -94,13 +104,22 @@ if [ -n "$E2E_FOLDER" ]; then
     export DISABLE_L2_FUND="true"
 
     log_info "Running BATS E2E tests..."
-    bats tests/cdk/access-list-e2e.bats tests/cdk/basic-e2e.bats tests/cdk/e2e.bats
-
-    if [[ "$TEST_TYPE" == "fork9-cdk-validium" || "$TEST_TYPE" == "fork11-rollup" ]]; then
-        bats tests/cdk/bridge-e2e.bats
-    elif [[ "$TEST_TYPE" == "fork12-cdk-validium" || "$TEST_TYPE" == "fork12-rollup" ]]; then
-        bats tests/aggkit/bridge-e2e.bats tests/aggkit/bridge-e2e-custom-gas.bats
-    fi
+    bats tests/cdk/access-list-e2e.bats tests/cdk/basic-e2e.bats
+    
+    case "$TEST_TYPE" in
+        "fork9-cdk-validium"|"fork11-rollup"|"fork12-rollup-zkevm-bridge")
+            bats tests/cdk/e2e.bats tests/cdk/bridge-e2e.bats
+            ;;
+        "fork12-cdk-validium"|"fork12-rollup")
+            bats tests/cdk/e2e.bats tests/aggkit/bridge-e2e.bats tests/aggkit/bridge-e2e-custom-gas.bats
+            ;;
+        "fork12-pessimistic")
+            bats tests/aggkit/bridge-e2e.bats tests/aggkit/bridge-e2e-custom-gas.bats
+            ;;
+        "fork12-multi-l2-networks")
+            bats ./tests/aggkit/bridge-l2_to_l2-e2e.bats
+            ;;
+    esac
 
     popd >/dev/null
     log_info "E2E tests completed. Logs saved to $LOG_FILE"
