@@ -14,6 +14,7 @@
     "sequencer_type": "erigon",
     "aggkit_image": "ghcr.io/agglayer/aggkit:0.4.0-beta9-tmp-bridge",
     "aggkit_components": "bridge",
-    "enable_aggkit_claim_sponsor": false
+    "enable_aggkit_claim_sponsor": false,
+    "additional_services": []
   }
 }
