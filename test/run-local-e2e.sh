@@ -7,17 +7,17 @@ RED='\033[0;31m'
 NC='\033[0m'
 
 log_info() {
-    echo -e "${GREEN}[INFO]${NC} $*" | tee -a "$LOG_FILE"
+    echo -e "${GREEN}[INFO]${NC} $*"
 }
 
 log_error() {
-    echo -e "${RED}[ERROR]${NC} $*" | tee -a "$LOG_FILE"
+    echo -e "${RED}[ERROR]${NC} $*"
 }
 
 trap 'log_error "Script failed at line $LINENO"' ERR
 
 if [ "$#" -lt 2 ]; then
-    echo "Usage: $0 <test_type: fork9-cdk-validium | fork11-rollup | fork12-cdk-validium | fork12-rollup | fork-12-pessimistic | fork12-rollup-zkevm-bridge | fork12-multi-l2-networks> <path/to/kurtosis-cdk/repo> [<path/to/e2e/repo>]"
+    echo "Usage: $0 <test_type: fork9-cdk-validium | fork11-rollup | fork12-cdk-validium | fork12-rollup | fork12-rollup-zkevm-bridge | fork12-multi-l2-networks> <path/to/kurtosis-cdk/repo> [<path/to/e2e/repo>]"
     exit 1
 fi
 
@@ -26,14 +26,6 @@ KURTOSIS_FOLDER=$2
 E2E_FOLDER=${3:-""}
 
 PROJECT_ROOT="$PWD"
-ROOT_FOLDER="/tmp/cdk-e2e-run"
-LOG_FOLDER="$ROOT_FOLDER/logs"
-LOG_FILE="$LOG_FOLDER/run-local-e2e.log"
-
-rm -rf "$ROOT_FOLDER"
-mkdir -p "$LOG_FOLDER"
-
-exec > >(tee -a "$LOG_FILE") 2>&1
 
 log_info "Starting local E2E setup..."
 
@@ -101,7 +93,6 @@ if [ -n "$E2E_FOLDER" ]; then
     export BATS_LIB_PATH="$PWD/core/helpers/lib"
     export PROJECT_ROOT="$PWD"
     export ENCLAVE="$ENCLAVE"
-    export DISABLE_L2_FUND="true"
 
     log_info "Running BATS E2E tests..."
     bats tests/cdk/access-list-e2e.bats tests/cdk/basic-e2e.bats
@@ -113,16 +104,13 @@ if [ -n "$E2E_FOLDER" ]; then
         "fork12-cdk-validium"|"fork12-rollup")
             bats tests/cdk/e2e.bats tests/aggkit/bridge-e2e.bats tests/aggkit/bridge-e2e-custom-gas.bats
             ;;
-        "fork12-pessimistic")
-            bats tests/aggkit/bridge-e2e.bats tests/aggkit/bridge-e2e-custom-gas.bats
-            ;;
         "fork12-multi-l2-networks")
             bats ./tests/aggkit/bridge-l2_to_l2-e2e.bats
             ;;
     esac
 
     popd >/dev/null
-    log_info "E2E tests completed. Logs saved to $LOG_FILE"
+    log_info "E2E tests completed."
 else
     log_info "No E2E repo provided. Skipping tests."
     exit 0
