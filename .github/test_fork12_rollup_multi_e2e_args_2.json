@@ -3,7 +3,8 @@
     "deploy_l1": false,
     "deploy_agglayer": false,
     "deploy_aggkit_node": true,
-    "deploy_cdk_bridge_infra": false
+    "deploy_cdk_bridge_infra": false,
+    "deploy_optimism_rollup": false
   },
   "args": {
     "verbosity": "debug",

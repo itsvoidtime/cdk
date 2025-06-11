@@ -2,7 +2,8 @@
   "deployment_stages": {
     "deploy_l2_contracts": true,
     "deploy_aggkit_node": true,
-    "deploy_cdk_bridge_infra": false
+    "deploy_cdk_bridge_infra": false,
+    "deploy_optimism_rollup": false
   },
   "args": {
     "verbosity": "debug",

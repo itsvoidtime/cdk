@@ -1,4 +1,7 @@
 {
+  "deployment_stages": {
+    "deploy_optimism_rollup": false
+  },
   "args": {
     "zkevm_contracts_image": "leovct/zkevm-contracts:v7.0.0-rc.2-fork.11-patch.1",
     "zkevm_prover_image": "hermeznetwork/zkevm-prover:v7.0.4-hotfix.2-fork.11",

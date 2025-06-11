@@ -1,6 +1,7 @@
 {
   "deployment_stages": {
-    "deploy_cdk_bridge_infra": true
+    "deploy_cdk_bridge_infra": true,
+    "deploy_optimism_rollup": false
   },
   "args": {
     "zkevm_contracts_image": "jhkimqd/zkevm-contracts:v10.1.0-rc.5-fork.12",
