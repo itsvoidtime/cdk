@@ -11,7 +11,7 @@ import (
 	"github.com/0xPolygon/cdk/state"
 	"github.com/0xPolygon/zkevm-ethtx-manager/ethtxmanager"
 	ethtxtypes "github.com/0xPolygon/zkevm-ethtx-manager/types"
-	"github.com/agglayer/aggkit/db"
+	dbtypes "github.com/agglayer/aggkit/db/types"
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto/kzg4844"
@@ -55,18 +55,18 @@ type aggregatorTxProfitabilityChecker interface {
 
 // StateInterface gathers the methods to interact with the state.
 type StorageInterface interface {
-	BeginTx(ctx context.Context, options *sql.TxOptions) (db.Txer, error)
-	CheckProofContainsCompleteSequences(ctx context.Context, proof *state.Proof, dbTx db.Txer) (bool, error)
-	GetProofReadyToVerify(ctx context.Context, lastVerfiedBatchNumber uint64, dbTx db.Txer) (*state.Proof, error)
-	GetProofsToAggregate(ctx context.Context, dbTx db.Txer) (*state.Proof, *state.Proof, error)
-	AddGeneratedProof(ctx context.Context, proof *state.Proof, dbTx db.Txer) error
-	UpdateGeneratedProof(ctx context.Context, proof *state.Proof, dbTx db.Txer) error
-	DeleteGeneratedProofs(ctx context.Context, batchNumber uint64, batchNumberFinal uint64, dbTx db.Txer) error
-	DeleteUngeneratedProofs(ctx context.Context, dbTx db.Txer) error
-	CleanupGeneratedProofs(ctx context.Context, batchNumber uint64, dbTx db.Txer) error
-	CleanupLockedProofs(ctx context.Context, duration string, dbTx db.Txer) (int64, error)
-	CheckProofExistsForBatch(ctx context.Context, batchNumber uint64, dbTx db.Txer) (bool, error)
-	AddSequence(ctx context.Context, sequence state.Sequence, dbTx db.Txer) error
+	BeginTx(ctx context.Context, options *sql.TxOptions) (dbtypes.Txer, error)
+	CheckProofContainsCompleteSequences(ctx context.Context, proof *state.Proof, dbTx dbtypes.Txer) (bool, error)
+	GetProofReadyToVerify(ctx context.Context, lastVerfiedBatchNumber uint64, dbTx dbtypes.Txer) (*state.Proof, error)
+	GetProofsToAggregate(ctx context.Context, dbTx dbtypes.Txer) (*state.Proof, *state.Proof, error)
+	AddGeneratedProof(ctx context.Context, proof *state.Proof, dbTx dbtypes.Txer) error
+	UpdateGeneratedProof(ctx context.Context, proof *state.Proof, dbTx dbtypes.Txer) error
+	DeleteGeneratedProofs(ctx context.Context, batchNumber uint64, batchNumberFinal uint64, dbTx dbtypes.Txer) error
+	DeleteUngeneratedProofs(ctx context.Context, dbTx dbtypes.Txer) error
+	CleanupGeneratedProofs(ctx context.Context, batchNumber uint64, dbTx dbtypes.Txer) error
+	CleanupLockedProofs(ctx context.Context, duration string, dbTx dbtypes.Txer) (int64, error)
+	CheckProofExistsForBatch(ctx context.Context, batchNumber uint64, dbTx dbtypes.Txer) (bool, error)
+	AddSequence(ctx context.Context, sequence state.Sequence, dbTx dbtypes.Txer) error
 }
 
 // EthTxManagerClient represents the eth tx manager interface

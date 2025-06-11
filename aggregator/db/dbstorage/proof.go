@@ -8,11 +8,11 @@ import (
 	"time"
 
 	"github.com/0xPolygon/cdk/state"
-	"github.com/agglayer/aggkit/db"
+	dbtypes "github.com/agglayer/aggkit/db/types"
 )
 
 // CheckProofExistsForBatch checks if the batch is already included in any proof
-func (d *DBStorage) CheckProofExistsForBatch(ctx context.Context, batchNumber uint64, dbTx db.Txer) (bool, error) {
+func (d *DBStorage) CheckProofExistsForBatch(ctx context.Context, batchNumber uint64, dbTx dbtypes.Txer) (bool, error) {
 	const checkProofExistsForBatchSQL = `
 		SELECT EXISTS (SELECT 1 FROM proof p WHERE $1 >= p.batch_num AND $1 <= p.batch_num_final)
 		`
@@ -27,7 +27,7 @@ func (d *DBStorage) CheckProofExistsForBatch(ctx context.Context, batchNumber ui
 
 // CheckProofContainsCompleteSequences checks if a recursive proof contains complete sequences
 func (d *DBStorage) CheckProofContainsCompleteSequences(
-	ctx context.Context, proof *state.Proof, dbTx db.Txer,
+	ctx context.Context, proof *state.Proof, dbTx dbtypes.Txer,
 ) (bool, error) {
 	const getProofContainsCompleteSequencesSQL = `
 		SELECT EXISTS (SELECT 1 FROM sequence s1 WHERE s1.from_batch_num = $1) AND
@@ -44,7 +44,7 @@ func (d *DBStorage) CheckProofContainsCompleteSequences(
 
 // GetProofReadyToVerify return the proof that is ready to verify
 func (d *DBStorage) GetProofReadyToVerify(
-	ctx context.Context, lastVerfiedBatchNumber uint64, dbTx db.Txer,
+	ctx context.Context, lastVerfiedBatchNumber uint64, dbTx dbtypes.Txer,
 ) (*state.Proof, error) {
 	const getProofReadyToVerifySQL = `
 		SELECT 
@@ -103,7 +103,7 @@ func (d *DBStorage) GetProofReadyToVerify(
 }
 
 // GetProofsToAggregate return the next to proof that it is possible to aggregate
-func (d *DBStorage) GetProofsToAggregate(ctx context.Context, dbTx db.Txer) (*state.Proof, *state.Proof, error) {
+func (d *DBStorage) GetProofsToAggregate(ctx context.Context, dbTx dbtypes.Txer) (*state.Proof, *state.Proof, error) {
 	var (
 		proof1 = &state.Proof{}
 		proof2 = &state.Proof{}
@@ -209,7 +209,7 @@ func (d *DBStorage) GetProofsToAggregate(ctx context.Context, dbTx db.Txer) (*st
 }
 
 // AddGeneratedProof adds a generated proof to the storage
-func (d *DBStorage) AddGeneratedProof(ctx context.Context, proof *state.Proof, dbTx db.Txer) error {
+func (d *DBStorage) AddGeneratedProof(ctx context.Context, proof *state.Proof, dbTx dbtypes.Txer) error {
 	const addGeneratedProofSQL = `
 		INSERT INTO proof (
 			batch_num, batch_num_final, proof, proof_id, input_prover, prover, 
@@ -256,7 +256,7 @@ func (d *DBStorage) AddGeneratedProof(ctx context.Context, proof *state.Proof, d
 }
 
 // UpdateGeneratedProof updates a generated proof in the storage
-func (d *DBStorage) UpdateGeneratedProof(ctx context.Context, proof *state.Proof, dbTx db.Txer) error {
+func (d *DBStorage) UpdateGeneratedProof(ctx context.Context, proof *state.Proof, dbTx dbtypes.Txer) error {
 	const updateGeneratedProofSQL = `
 	UPDATE proof 
 	SET proof = $3, 
@@ -299,7 +299,7 @@ func (d *DBStorage) UpdateGeneratedProof(ctx context.Context, proof *state.Proof
 // DeleteGeneratedProofs deletes from the storage the generated proofs falling
 // inside the batch numbers range.
 func (d *DBStorage) DeleteGeneratedProofs(
-	ctx context.Context, batchNumber uint64, batchNumberFinal uint64, dbTx db.Txer,
+	ctx context.Context, batchNumber uint64, batchNumberFinal uint64, dbTx dbtypes.Txer,
 ) error {
 	const deleteGeneratedProofSQL = "DELETE FROM proof WHERE batch_num >= $1 AND batch_num_final <= $2"
 	e := d.getExecQuerier(dbTx)
@@ -309,7 +309,7 @@ func (d *DBStorage) DeleteGeneratedProofs(
 
 // CleanupGeneratedProofs deletes from the storage the generated proofs up to
 // the specified batch number included.
-func (d *DBStorage) CleanupGeneratedProofs(ctx context.Context, batchNumber uint64, dbTx db.Txer) error {
+func (d *DBStorage) CleanupGeneratedProofs(ctx context.Context, batchNumber uint64, dbTx dbtypes.Txer) error {
 	const deleteGeneratedProofSQL = "DELETE FROM proof WHERE batch_num_final <= $1"
 	e := d.getExecQuerier(dbTx)
 	_, err := e.Exec(deleteGeneratedProofSQL, batchNumber)
@@ -318,7 +318,7 @@ func (d *DBStorage) CleanupGeneratedProofs(ctx context.Context, batchNumber uint
 
 // CleanupLockedProofs deletes from the storage the proofs locked in generating
 // state for more than the provided threshold.
-func (d *DBStorage) CleanupLockedProofs(ctx context.Context, duration string, dbTx db.Txer) (int64, error) {
+func (d *DBStorage) CleanupLockedProofs(ctx context.Context, duration string, dbTx dbtypes.Txer) (int64, error) {
 	seconds, err := convertDurationToSeconds(duration)
 	if err != nil {
 		return 0, err
@@ -337,7 +337,7 @@ func (d *DBStorage) CleanupLockedProofs(ctx context.Context, duration string, db
 
 // DeleteUngeneratedProofs deletes ungenerated proofs.
 // This method is meant to be use during aggregator boot-up sequence
-func (d *DBStorage) DeleteUngeneratedProofs(ctx context.Context, dbTx db.Txer) error {
+func (d *DBStorage) DeleteUngeneratedProofs(ctx context.Context, dbTx dbtypes.Txer) error {
 	const deleteUngeneratedProofsSQL = "DELETE FROM proof WHERE generating_since IS NOT NULL"
 	e := d.getExecQuerier(dbTx)
 	_, err := e.Exec(deleteUngeneratedProofsSQL)
