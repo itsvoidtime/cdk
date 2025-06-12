@@ -7,11 +7,11 @@ RED='\033[0;31m'
 NC='\033[0m'
 
 log_info() {
-    echo -e "${GREEN}[INFO]${NC} $*" | tee -a "$LOG_FILE"
+    echo -e "${GREEN}[INFO]${NC} $*"
 }
 
 log_error() {
-    echo -e "${RED}[ERROR]${NC} $*" | tee -a "$LOG_FILE"
+    echo -e "${RED}[ERROR]${NC} $*"
 }
 
 trap 'log_error "Script failed at line $LINENO"' ERR
@@ -26,14 +26,6 @@ KURTOSIS_FOLDER=$2
 E2E_FOLDER=${3:-""}
 
 PROJECT_ROOT="$PWD"
-ROOT_FOLDER="/tmp/cdk-e2e-run"
-LOG_FOLDER="$ROOT_FOLDER/logs"
-LOG_FILE="$LOG_FOLDER/run-local-e2e.log"
-
-rm -rf "$ROOT_FOLDER"
-mkdir -p "$LOG_FOLDER"
-
-exec > >(tee -a "$LOG_FILE") 2>&1
 
 log_info "Starting local E2E setup..."
 
@@ -122,7 +114,7 @@ if [ -n "$E2E_FOLDER" ]; then
     esac
 
     popd >/dev/null
-    log_info "E2E tests completed. Logs saved to $LOG_FILE"
+    log_info "E2E tests completed."
 else
     log_info "No E2E repo provided. Skipping tests."
     exit 0
