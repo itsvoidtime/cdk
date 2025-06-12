@@ -20,6 +20,5 @@
     "gas_token_enabled": false,
     "enable_normalcy": true,
     "zkevm_rollup_id": 1
-
   }
 }
