@@ -95,17 +95,15 @@ if [ -n "$E2E_FOLDER" ]; then
     export ENCLAVE="$ENCLAVE"
 
     log_info "Running BATS E2E tests..."
-    bats tests/cdk/access-list-e2e.bats tests/cdk/basic-e2e.bats
-    
     case "$TEST_TYPE" in
         "fork9-cdk-validium"|"fork11-rollup"|"fork12-rollup-zkevm-bridge")
-            bats tests/cdk/e2e.bats tests/cdk/bridge-e2e.bats
+            bats tests/cdk/access-list-e2e.bats tests/cdk/basic-e2e.bats tests/cdk/e2e.bats tests/cdk/bridge-e2e.bats
             ;;
         "fork12-cdk-validium"|"fork12-rollup")
-            bats tests/cdk/e2e.bats tests/aggkit/bridge-e2e.bats tests/aggkit/bridge-e2e-custom-gas.bats
+            bats tests/cdk/access-list-e2e.bats tests/cdk/basic-e2e.bats tests/cdk/e2e.bats tests/aggkit/bridge-e2e.bats tests/aggkit/bridge-e2e-custom-gas.bats
             ;;
         "fork12-multi-l2-networks")
-            bats ./tests/aggkit/bridge-l2_to_l2-e2e.bats
+            bats ./tests/aggkit/bridge-e2e-2-chains.bats
             ;;
     esac
 
