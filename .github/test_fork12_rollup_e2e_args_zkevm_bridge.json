@@ -10,6 +10,7 @@
     "gas_token_enabled": true,
     "gas_token_address": "",
     "consensus_contract_type": "rollup",
-    "sequencer_type": "erigon"
+    "sequencer_type": "erigon",
+    "additional_services": []
   }
 }
