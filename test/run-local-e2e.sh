@@ -109,7 +109,7 @@ if [ -n "$E2E_FOLDER" ]; then
             bats tests/aggkit/bridge-e2e.bats tests/aggkit/bridge-e2e-custom-gas.bats
             ;;
         "fork12-multi-l2-networks")
-            bats ./tests/aggkit/bridge-l2_to_l2-e2e.bats
+            bats ./tests/aggkit/bridge-e2e-2-chains.bats
             ;;
     esac
 
