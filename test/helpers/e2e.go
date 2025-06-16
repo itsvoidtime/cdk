@@ -14,10 +14,10 @@ import (
 	"github.com/0xPolygon/cdk/test/contracts/transparentupgradableproxy"
 	"github.com/agglayer/aggkit/bridgesync"
 	aggkitTypes "github.com/agglayer/aggkit/config/types"
-	aggkitetherman "github.com/agglayer/aggkit/etherman"
 	"github.com/agglayer/aggkit/l1infotreesync"
 	"github.com/agglayer/aggkit/reorgdetector"
 	aggkittesthelpers "github.com/agglayer/aggkit/test/helpers"
+	aggkittypes "github.com/agglayer/aggkit/types"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -104,11 +104,11 @@ func L1Setup(t *testing.T) *L1Environment {
 	l1InfoTreeSync, err := l1infotreesync.New(
 		ctx, dbPathL1InfoTreeSync,
 		gerL1Addr, common.Address{},
-		syncBlockChunkSize, aggkitetherman.LatestBlock,
+		syncBlockChunkSize, aggkittypes.LatestBlock,
 		rdL1, l1Client.Client(),
 		time.Millisecond, 0, periodRetry,
 		retries, l1infotreesync.FlagAllowWrongContractsAddrs,
-		aggkitetherman.SafeBlock,
+		aggkittypes.SafeBlock,
 		false,
 	)
 	require.NoError(t, err)
@@ -129,7 +129,7 @@ func L1Setup(t *testing.T) *L1Environment {
 	dbPathBridgeSyncL1 := path.Join(t.TempDir(), "BridgeSyncL1.sqlite")
 	bridgeL1Sync, err := bridgesync.NewL1(
 		ctx, dbPathBridgeSyncL1, bridgeL1Addr,
-		syncBlockChunks, aggkitetherman.LatestBlock, rdL1, testClient,
+		syncBlockChunks, aggkittypes.LatestBlock, rdL1, testClient,
 		initialBlock, waitForNewBlocksPeriod, retryPeriod,
 		retriesCount, originNetwork, false, false)
 	require.NoError(t, err)
@@ -187,7 +187,7 @@ func L2Setup(t *testing.T, networkID uint32) *L2Environment {
 
 	bridgeL2Sync, err := bridgesync.NewL2(
 		ctx, dbPathL2BridgeSync, bridgeL2Addr, syncBlockChunks,
-		aggkitetherman.LatestBlock, rdL2, testClient,
+		aggkittypes.LatestBlock, rdL2, testClient,
 		initialBlock, waitForNewBlocksPeriod, retryPeriod,
 		retriesCount, originNetwork, false, false)
 	require.NoError(t, err)
