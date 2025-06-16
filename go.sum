@@ -23,6 +23,8 @@ github.com/0xPolygon/cdk-contracts-tooling v0.0.4 h1:nQGwmS30bZovCKGGuF9zWcoVZFk
 github.com/0xPolygon/cdk-contracts-tooling v0.0.4/go.mod h1:mFlcEjsm2YBBsu8atHJ3zyVnwM+Z/fMXpVmIJge+WVU=
 github.com/0xPolygon/cdk-data-availability v0.0.13 h1:CoZoSGOtg+wCF3s9XfLf+dc9H5SdPDMEhmiwNrFf1iY=
 github.com/0xPolygon/cdk-data-availability v0.0.13/go.mod h1:u/vHga1Wdx4qeglcvh3VCGxeU7h/EouZnuYeFBibOZU=
+github.com/0xPolygon/cdk-data-availability v0.0.14-0.20250616154938-51f7e3c0d096 h1:J1NbAUYZrYTfjnb8Y7EbX1oJQBP+rybnAtnTS89Kl88=
+github.com/0xPolygon/cdk-data-availability v0.0.14-0.20250616154938-51f7e3c0d096/go.mod h1:sreo1poyneLBLEu0LS8Ej5qrG9oFfPhSLwwqtaVk6x4=
 github.com/0xPolygon/cdk-rpc v0.0.0-20250213125803-179882ad6229 h1:6YhqNQVcXkoxqs5zQVg1bREuoeKvwpffpfoL8QQT+u4=
 github.com/0xPolygon/cdk-rpc v0.0.0-20250213125803-179882ad6229/go.mod h1:2scWqMMufrQXu7TikDgQ3BsyaKoX8qP26D6E262vSOg=
 github.com/0xPolygon/zkevm-ethtx-manager v0.2.14 h1:mC06JfotRTxRYea9zEnHbNMhB76pXmD23Axl0/HjNBw=
