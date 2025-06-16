@@ -4,7 +4,7 @@ go 1.24.4
 
 require (
 	github.com/0xPolygon/cdk-contracts-tooling v0.0.4
-	github.com/0xPolygon/cdk-data-availability v0.0.14-0.20250616154938-51f7e3c0d096
+	github.com/0xPolygon/cdk-data-availability v0.0.14-0.20250616155510-076e73c1a237
 	github.com/0xPolygon/cdk-rpc v0.0.0-20250213125803-179882ad6229
 	github.com/0xPolygon/zkevm-ethtx-manager v0.2.14
 	github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8
@@ -32,9 +32,6 @@ require (
 )
 
 require (
-	buf.build/gen/go/agglayer/interop/protocolbuffers/go v1.36.6-20250519093743-85e8a3d9f59c.1 // indirect
-	buf.build/gen/go/agglayer/provers/grpc/go v1.5.1-20250520163122-7efa0a2f81a8.2 // indirect
-	buf.build/gen/go/agglayer/provers/protocolbuffers/go v1.36.6-20250520163122-7efa0a2f81a8.1 // indirect
 	cloud.google.com/go v0.116.0 // indirect
 	cloud.google.com/go/auth v0.13.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.6 // indirect
