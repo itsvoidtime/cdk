@@ -1,14 +1,14 @@
 module github.com/0xPolygon/cdk
 
-go 1.24.2
+go 1.24.4
 
 require (
 	github.com/0xPolygon/cdk-contracts-tooling v0.0.4
 	github.com/0xPolygon/cdk-data-availability v0.0.13
 	github.com/0xPolygon/cdk-rpc v0.0.0-20250213125803-179882ad6229
-	github.com/0xPolygon/zkevm-ethtx-manager v0.2.13
+	github.com/0xPolygon/zkevm-ethtx-manager v0.2.14
 	github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8
-	github.com/agglayer/aggkit v0.4.0-beta1.0.20250611134940-086ed6cb4a60
+	github.com/agglayer/aggkit v0.4.0-beta1.0.20250613175003-d3699057130a
 	github.com/ethereum/go-ethereum v1.15.5
 	github.com/iden3/go-iden3-crypto v0.0.17
 	github.com/invopop/jsonschema v0.13.0
@@ -32,6 +32,9 @@ require (
 )
 
 require (
+	buf.build/gen/go/agglayer/interop/protocolbuffers/go v1.36.6-20250519093743-85e8a3d9f59c.1 // indirect
+	buf.build/gen/go/agglayer/provers/grpc/go v1.5.1-20250520163122-7efa0a2f81a8.2 // indirect
+	buf.build/gen/go/agglayer/provers/protocolbuffers/go v1.36.6-20250520163122-7efa0a2f81a8.1 // indirect
 	cloud.google.com/go v0.116.0 // indirect
 	cloud.google.com/go/auth v0.13.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.6 // indirect
@@ -43,7 +46,7 @@ require (
 	github.com/DataDog/zstd v1.5.6 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/VictoriaMetrics/fastcache v1.12.2 // indirect
-	github.com/agglayer/go_signer v0.0.6 // indirect
+	github.com/agglayer/go_signer v0.0.7 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.32.8 // indirect
 	github.com/aws/aws-sdk-go-v2/config v1.28.11 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.52 // indirect

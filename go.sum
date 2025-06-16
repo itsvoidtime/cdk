@@ -1,3 +1,9 @@
+buf.build/gen/go/agglayer/interop/protocolbuffers/go v1.36.6-20250519093743-85e8a3d9f59c.1 h1:IlyvV/Wfnw5zM4ylH1jb0VJFm6dAzxgQJ3iphG+I7Gc=
+buf.build/gen/go/agglayer/interop/protocolbuffers/go v1.36.6-20250519093743-85e8a3d9f59c.1/go.mod h1:W3XIAooP7VLR0wAorIvMG2xNYX+C48U9QHfn8uUox3I=
+buf.build/gen/go/agglayer/provers/grpc/go v1.5.1-20250520163122-7efa0a2f81a8.2 h1:gV+6xXfMHDXA4XI5jCpJmMITl6A51SUaoECeRO4/GAY=
+buf.build/gen/go/agglayer/provers/grpc/go v1.5.1-20250520163122-7efa0a2f81a8.2/go.mod h1:NJnqmcfr760oCyvQ8MC6H8HsXRTHtzqAkzhEj+ms0uU=
+buf.build/gen/go/agglayer/provers/protocolbuffers/go v1.36.6-20250520163122-7efa0a2f81a8.1 h1:PJLgwZChl8vcEztNCxMOVy6dx23YKI9HWqMP2RwC9FQ=
+buf.build/gen/go/agglayer/provers/protocolbuffers/go v1.36.6-20250520163122-7efa0a2f81a8.1/go.mod h1:oK9iGjg1TlVodZK5zVPYId80B6uB2PK956lx1uO9h4g=
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 cloud.google.com/go v0.116.0 h1:B3fRrSDkLRt5qSHWe40ERJvhvnQwdZiHu0bJOpldweE=
 cloud.google.com/go v0.116.0/go.mod h1:cEPSRWPzZEswwdr9BxE6ChEn01dWlTaF05LiC2Xs70U=
@@ -19,8 +25,8 @@ github.com/0xPolygon/cdk-data-availability v0.0.13 h1:CoZoSGOtg+wCF3s9XfLf+dc9H5
 github.com/0xPolygon/cdk-data-availability v0.0.13/go.mod h1:u/vHga1Wdx4qeglcvh3VCGxeU7h/EouZnuYeFBibOZU=
 github.com/0xPolygon/cdk-rpc v0.0.0-20250213125803-179882ad6229 h1:6YhqNQVcXkoxqs5zQVg1bREuoeKvwpffpfoL8QQT+u4=
 github.com/0xPolygon/cdk-rpc v0.0.0-20250213125803-179882ad6229/go.mod h1:2scWqMMufrQXu7TikDgQ3BsyaKoX8qP26D6E262vSOg=
-github.com/0xPolygon/zkevm-ethtx-manager v0.2.13 h1:LzLf0jjuPcAlhKh0FDYSp+Xe+6h7cglHgb+YfOowl4U=
-github.com/0xPolygon/zkevm-ethtx-manager v0.2.13/go.mod h1:mRdWtyuzQQOiQWvo1nNuj44H0UNqK/8FOF44bjOCKYs=
+github.com/0xPolygon/zkevm-ethtx-manager v0.2.14 h1:mC06JfotRTxRYea9zEnHbNMhB76pXmD23Axl0/HjNBw=
+github.com/0xPolygon/zkevm-ethtx-manager v0.2.14/go.mod h1:AmLGLIk9qrf1EGqZrgjBc3YGn+0Dc7Ee2KVLuiTBY7g=
 github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8 h1:DY6rxa5oqYUIzDH3TIFDSoXNzXFgiy8Lyn6ZwO3GMec=
 github.com/0xPolygonHermez/zkevm-synchronizer-l1 v1.0.8/go.mod h1:IYqOmGBjvpJKRjVVqH3pGQysHU8W8YSctbl4TQDjNMg=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
@@ -35,10 +41,10 @@ github.com/Microsoft/go-winio v0.6.2 h1:F2VQgta7ecxGYO8k3ZZz3RS8fVIXVxONVUPlNERo
 github.com/Microsoft/go-winio v0.6.2/go.mod h1:yd8OoFMLzJbo9gZq8j5qaps8bJ9aShtEA8Ipt1oGCvU=
 github.com/VictoriaMetrics/fastcache v1.12.2 h1:N0y9ASrJ0F6h0QaC3o6uJb3NIZ9VKLjCM7NQbSmF7WI=
 github.com/VictoriaMetrics/fastcache v1.12.2/go.mod h1:AmC+Nzz1+3G2eCPapF6UcsnkThDcMsQicp4xDukwJYI=
-github.com/agglayer/aggkit v0.4.0-beta1.0.20250611134940-086ed6cb4a60 h1:ysaLaWAtq+mY7E68mSH7gIqEExD1ZEdfBr8RDSU9CBY=
-github.com/agglayer/aggkit v0.4.0-beta1.0.20250611134940-086ed6cb4a60/go.mod h1:h+wm32yptGPQJ10w+Z5gyFZhzoGTzt+oqi99eHcSMPg=
-github.com/agglayer/go_signer v0.0.6 h1:IKeh4JMvWAXZX/0lGEF0W/UatmUc7LEo5Nm0L+yCcqc=
-github.com/agglayer/go_signer v0.0.6/go.mod h1:YIoQNqvA10L/qV9vlAV8rXjejnyPpnYA0A/zU1uxXeY=
+github.com/agglayer/aggkit v0.4.0-beta1.0.20250613175003-d3699057130a h1:thVOLqER5fQnkJLhypuNfqaDmH6Tm0TkwToUlD6qWg4=
+github.com/agglayer/aggkit v0.4.0-beta1.0.20250613175003-d3699057130a/go.mod h1:RgCPzBRBiDSBBYbfoH7yXulzUk5e/0NAKRsJkIUdzd0=
+github.com/agglayer/go_signer v0.0.7 h1:V+4wFWjGKdL1GgXSzx2RLgglJWyce95Dy/4+9xx52hs=
+github.com/agglayer/go_signer v0.0.7/go.mod h1:PiDQugvxAgTYDD9bbWcqBMl/LuOOG/B9Hx1N1lIPq0s=
 github.com/allegro/bigcache v1.2.1-0.20190218064605-e24eb225f156/go.mod h1:Cb/ax3seSYIx7SuZdm2G2xzfwmv3TPSk2ucNfQESPXM=
 github.com/allegro/bigcache v1.2.1 h1:hg1sY1raCwic3Vnsvje6TT7/pnZba83LeFck5NrFKSc=
 github.com/allegro/bigcache v1.2.1/go.mod h1:Cb/ax3seSYIx7SuZdm2G2xzfwmv3TPSk2ucNfQESPXM=
